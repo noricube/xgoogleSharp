@@ -62,7 +62,7 @@ namespace xgoogleSharp
 
             //fetchUrl = "http://chp.ly.lv/google.html";
 
-            Console.WriteLine(fetchUrl);
+            //Console.WriteLine(fetchUrl);
             await Task.Delay(1000);
                 
             string content = await Browser.FetchPage(fetchUrl);
@@ -82,7 +82,7 @@ namespace xgoogleSharp
                 {
                     continue;
                 }
-                Console.WriteLine(node.InnerText);
+                //Console.WriteLine(node.InnerText);
                 results.Add(new GoogleSearchResult()
                 {
                     Title = HttpUtility.HtmlDecode(titleNode.InnerText),
