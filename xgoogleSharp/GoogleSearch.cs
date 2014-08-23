@@ -20,7 +20,7 @@ namespace xgoogleSharp
         public bool HasNext { get; protected set; }
         protected int RequestPerPage;
         protected string Query;
-        
+
         private Browser Browser;
 
 
@@ -37,7 +37,7 @@ namespace xgoogleSharp
             var results = new List<GoogleSearchResult>();
 
             string fetchUrl;
-            if ( RequestPerPage == 10)
+            if (RequestPerPage == 10)
             {
                 if (Page == 1)
                 {
@@ -45,7 +45,7 @@ namespace xgoogleSharp
                 }
                 else
                 {
-                    fetchUrl = String.Format(NEXT_PAGE_0, Query, (Page-1) * RequestPerPage);
+                    fetchUrl = String.Format(NEXT_PAGE_0, Query, (Page - 1) * RequestPerPage);
                 }
             }
             else
@@ -64,7 +64,7 @@ namespace xgoogleSharp
 
             //Console.WriteLine(fetchUrl);
             await Task.Delay(1000);
-                
+
             string content = await Browser.FetchPage(fetchUrl);
 
             var html = new HtmlDocument();
@@ -78,7 +78,7 @@ namespace xgoogleSharp
                 var titleNode = node.QuerySelector("h3.r a");
                 var descNode = node.QuerySelector("span.st");
 
-                if (descNode == null )
+                if (descNode == null)
                 {
                     continue;
                 }
@@ -95,7 +95,7 @@ namespace xgoogleSharp
             HasNext = false;
             foreach (var node in document.QuerySelectorAll("span"))
             {
-                if (node.InnerText.Equals("Next"))
+                if (node.InnerText.IndexOf("Next") >= 0)
                 {
                     HasNext = true;
                     Page++;
